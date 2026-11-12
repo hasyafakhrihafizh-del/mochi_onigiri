@@ -69,18 +69,19 @@
           <label><input type="radio" name="payment" value="E-Wallet"><span>▣</span><b>Dompet digital</b></label>
           <label><input type="radio" name="payment" value="Tunai"><span>₨</span><b>Tunai</b></label>
         </div>
+        <!-- Kotak penampil QRIS (tersembunyi secara default) -->
+<div id="qrisBox" style="display: none; text-align: center; margin-top: 14px; padding: 14px; background: #faf6f0; border: 1px dashed #c8b8a6; border-radius: 12px;">
+  <p style="font-size: 13px; margin-bottom: 8px; font-weight: 600;">Scan QRIS di bawah untuk membayar:</p>
+  <img src="qris.jpeg" alt="Kode QRIS Mochi & Onigiri" style="max-width: 210px; width: 100%; border-radius: 8px; margin: 0 auto; display: block;">
+  <p style="font-size: 12px; color: #6e6259; margin-top: 8px;">Simpan bukti transfer lalu kirim via WhatsApp setelah klik pesan.</p>
+</div>
         <div class="total-line checkout-total"><span>Total pesanan</span><b id="checkoutTotal">Rp0</b></div>
         <button class="btn primary full" type="submit" id="placeOrder">Buat pesanan dan simpan</button>
         <p class="tiny">Pesanan akan disimpan ke Supabase. Pembayaran belum otomatis terverifikasi.</p>
       </form>
     </div>
   </div>
-<!-- Kotak penampil QRIS (tersembunyi secara default) -->
-<div id="qrisBox" style="display: none; text-align: center; margin-top: 14px; padding: 14px; background: #faf6f0; border: 1px dashed #c8b8a6; border-radius: 12px;">
-  <p style="font-size: 13px; margin-bottom: 8px; font-weight: 600;">Scan QRIS di bawah untuk membayar:</p>
-  <img src="qris.jpeg" alt="Kode QRIS Mochi & Onigiri" style="max-width: 210px; width: 100%; border-radius: 8px; margin: 0 auto; display: block;">
-  <p style="font-size: 12px; color: #6e6259; margin-top: 8px;">Simpan bukti transfer lalu kirim via WhatsApp setelah klik pesan.</p>
-</div>
+
 
   <div id="receiptModal" class="modal">
     <div class="modal-card receipt">

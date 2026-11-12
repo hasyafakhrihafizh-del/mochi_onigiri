@@ -146,14 +146,11 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCart();documen
 loadProducts().then(renderCart);
 
 // Tampilkan gambar QRIS saat metode pembayaran QRIS dipilih
-document.querySelectorAll('input[name="paymentMethod"], input[type="radio"]').forEach((radio) => {
+document.querySelectorAll('input[name="payment"]').forEach((radio) => {
   radio.addEventListener("change", (e) => {
     const qrisBox = document.getElementById("qrisBox");
     if (!qrisBox) return;
-    if (e.target.value === "QRIS") {
-      qrisBox.style.display = "block";
-    } else {
-      qrisBox.style.display = "none";
-    }
+    qrisBox.style.display = e.target.value === "QRIS" ? "block" : "none";
   });
 });
+
