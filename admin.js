@@ -1,6 +1,6 @@
 // Isi dengan Project URL dan anon/public key Supabase yang sama dengan app.js.
-const SUPABASE_URL = "https://YOUR_PROJECT_ID.supabase.co";
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+const SUPABASE_URL = "https://isgqfyqbayiemmadgnjo.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_2vX4KDP4mTVWEKuyuMGAJQ_r01d2lcD";
 const configured = !SUPABASE_URL.includes("YOUR_PROJECT_ID") && SUPABASE_ANON_KEY !== "YOUR_SUPABASE_ANON_KEY" && window.supabase;
 const db = configured ? window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY) : null;
 const $=s=>document.querySelector(s);
