@@ -154,16 +154,37 @@ document.querySelectorAll('input[name="payment"]').forEach((radio) => {
   });
 });
 
-// 2. Munculkan QRIS di Halaman Struk setelah form dikirim
-const formCheckout = document.getElementById("checkoutForm");
-if (formCheckout) {
-  formCheckout.addEventListener("submit", () => {
-    const selectedPayment = document.querySelector('input[name="payment"]:checked')?.value;
-    const receiptQris = document.getElementById("receiptQris");
-    if (receiptQris) {
-      receiptQris.style.display = selectedPayment === "QRIS" ? "block" : "none";
+// Data nomor tujuan E-Wallet (Ganti dengan nomor milikmu)
+const ewalletAccounts = {
+  GoPay: "0812-3456-7890 (a.n. Mochi & Onigiri)",
+  DANA: "0812-3456-7890 (a.n. Mochi & Onigiri)",
+  OVO: "0812-3456-7890 (a.n. Mochi & Onigiri)",
+  ShopeePay: "0812-3456-7890 (a.n. Mochi & Onigiri)"
+};
+
+// Munculkan QRIS atau kotak E-Wallet saat metode pembayaran dipilih
+document.querySelectorAll('input[name="payment"]').forEach((radio) => {
+  radio.addEventListener("change", (e) => {
+    const qrisBox = document.getElementById("qrisBox");
+    const ewalletBox = document.getElementById("ewalletBox");
+    
+    if (qrisBox) {
+      qrisBox.style.display = e.target.value === "QRIS" ? "block" : "none";
+    }
+    if (ewalletBox) {
+      ewalletBox.style.display = e.target.value === "E-Wallet" ? "block" : "none";
     }
   });
-}
+});
 
-
+// Tampilkan nomor tujuan sesuai E-Wallet yang dipilih pelanggan
+document.querySelectorAll('input[name="ewalletProvider"]').forEach((radio) => {
+  radio.addEventListener("change", (e) => {
+    const detailBox = document.getElementById("ewalletDetail");
+    const selected = e.target.value;
+    if (detailBox && ewalletAccounts[selected]) {
+      detailBox.style.display = "block";
+      detailBox.innerHTML = `Transfer ke <b>${selected}</b>:<br><span style="font-size: 14px; font-weight: 700; color: #633b2b;">${ewalletAccounts[selected]}</span><br><small style="color: #6e6259;">Kirim bukti transfer via WhatsApp setelah klik pesan.</small>`;
+    }
+  });
+});
