@@ -144,3 +144,16 @@ $("#printReceipt").addEventListener("click",()=>window.print());
 $("#year").textContent=new Date().getFullYear();
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCart();document.querySelectorAll(".modal.open").forEach(m=>closeModal(m.id));}});
 loadProducts().then(renderCart);
+
+// Tampilkan gambar QRIS saat metode pembayaran QRIS dipilih
+document.querySelectorAll('input[name="paymentMethod"], input[type="radio"]').forEach((radio) => {
+  radio.addEventListener("change", (e) => {
+    const qrisBox = document.getElementById("qrisBox");
+    if (!qrisBox) return;
+    if (e.target.value === "QRIS") {
+      qrisBox.style.display = "block";
+    } else {
+      qrisBox.style.display = "none";
+    }
+  });
+});
