@@ -154,37 +154,48 @@ document.querySelectorAll('input[name="payment"]').forEach((radio) => {
   });
 });
 
-// Data nomor tujuan E-Wallet (Ganti dengan nomor milikmu)
-const ewalletAccounts = {
-  GoPay: "0812-3456-7890 (a.n. Mochi & Onigiri)",
-  DANA: "0812-3456-7890 (a.n. Mochi & Onigiri)",
-  OVO: "0812-3456-7890 (a.n. Mochi & Onigiri)",
-  ShopeePay: "0812-3456-7890 (a.n. Mochi & Onigiri)"
+const ewalletData = {
+  GoPay: {
+    nomor: "0812-3456-7890 (a.n. Mochi & Onigiri)",
+    link: "gojek://gopay/merchanttransfer"
+  },
+  DANA: {
+    nomor: "0812-3456-7890 (a.n. Mochi & Onigiri)",
+    link: "https://dana.id"
+  },
+  OVO: {
+    nomor: "0812-3456-7890 (a.n. Mochi & Onigiri)",
+    link: "ovo://transfer"
+  },
+  ShopeePay: {
+    nomor: "0812-3456-7890 (a.n. Mochi & Onigiri)",
+    link: "shopeeid://shopeepay"
+  }
 };
 
-// Munculkan QRIS atau kotak E-Wallet saat metode pembayaran dipilih
+// Munculkan kotak QRIS atau E-Wallet saat metode dipilih
 document.querySelectorAll('input[name="payment"]').forEach((radio) => {
   radio.addEventListener("change", (e) => {
     const qrisBox = document.getElementById("qrisBox");
     const ewalletBox = document.getElementById("ewalletBox");
-    
-    if (qrisBox) {
-      qrisBox.style.display = e.target.value === "QRIS" ? "block" : "none";
-    }
-    if (ewalletBox) {
-      ewalletBox.style.display = e.target.value === "E-Wallet" ? "block" : "none";
+    if (qrisBox) qrisBox.style.display = e.target.value === "QRIS" ? "block" : "none";
+    if (ewalletBox) ewalletBox.style.display = e.target.value === "E-Wallet" ? "block" : "none";
+  });
+});
+
+// Tampilkan detail nomor & tombol buka aplikasi saat jenis E-Wallet diklik
+document.querySelectorAll('input[name="ewalletProvider"]').forEach((radio) => {
+  radio.addEventListener("change", (e) => {
+    const detailBox = document.getElementById("ewalletDetail");
+    const info = ewalletData[e.target.value];
+    if (detailBox && info) {
+      detailBox.style.display = "block";
+      detailBox.innerHTML = `
+        <p style="margin-bottom: 6px;">Tujuan transfer <b>${e.target.value}</b>:<br>
+        <span style="font-size: 14px; font-weight: 700; color: #633b2b;">${info.nomor}</span></p>
+        <a href="${info.link}" target="_blank" style="display: inline-block; margin-top: 4px; padding: 7px 14px; background: #633b2b; color: #fff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 12px;">Buka Aplikasi ${e.target.value} ↗</a>
+      `;
     }
   });
 });
 
-// Tampilkan nomor tujuan sesuai E-Wallet yang dipilih pelanggan
-document.querySelectorAll('input[name="ewalletProvider"]').forEach((radio) => {
-  radio.addEventListener("change", (e) => {
-    const detailBox = document.getElementById("ewalletDetail");
-    const selected = e.target.value;
-    if (detailBox && ewalletAccounts[selected]) {
-      detailBox.style.display = "block";
-      detailBox.innerHTML = `Transfer ke <b>${selected}</b>:<br><span style="font-size: 14px; font-weight: 700; color: #633b2b;">${ewalletAccounts[selected]}</span><br><small style="color: #6e6259;">Kirim bukti transfer via WhatsApp setelah klik pesan.</small>`;
-    }
-  });
-});
