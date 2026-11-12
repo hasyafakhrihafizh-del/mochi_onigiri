@@ -1,6 +1,6 @@
 // Isi dengan Project URL dan anon/public key Supabase yang sama dengan app.js.
 const SUPABASE_URL = "https://isgqfyqbayiemmadgnjo.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_2vX4KDP4mTVWEKuyuMGAJQ_r01d2lcD";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlzZ3FmeXFiYXlpZW1tYWRnbmpvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1OTYzOTUsImV4cCI6MjEwODE3MjM5NX0.G444gVM-AoL2X7mz-lZtdc61HGBMvkQxJdXnoRsIXEo";
 const configured = !SUPABASE_URL.includes("YOUR_PROJECT_ID") && SUPABASE_ANON_KEY !== "YOUR_SUPABASE_ANON_KEY" && window.supabase;
 const db = configured ? window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY) : null;
 const $=s=>document.querySelector(s);
