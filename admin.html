@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin — Mochi & Onigiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="admin.js"></script>
+</head>
+<body>
+  <header class="admin-header"><a class="brand" href="index.html"><span class="brand-mark">米</span><span><strong>Mochi<span>&</span>Onigiri</strong><small>ADMIN DASHBOARD</small></span></a><div class="header-actions"><a href="index.html">← Lihat toko</a><button id="logoutBtn" class="button outline hidden">Keluar</button></div></header>
+  <main class="container">
+    <section id="configWarning" class="notice hidden">Konfigurasi Supabase belum diisi. Edit <code>admin.js</code> dan <code>app.js</code> dengan Project URL serta anon key dari Supabase.</section>
+    <section id="loginPanel" class="login-card">
+      <span class="eyebrow">PRIVATE AREA</span><h1>Selamat datang,<br><em>Admin.</em></h1><p>Masuk untuk melihat pesanan dan mengelola status transaksi.</p>
+      <form id="loginForm"><label for="email">Email admin</label><input id="email" type="email" required autocomplete="username" placeholder="admin@email.com"><label for="password">Password</label><input id="password" type="password" required autocomplete="current-password" placeholder="Password"><button class="button primary full" type="submit" id="loginBtn">Masuk ke dashboard</button><p id="loginMessage" class="message"></p></form>
+      <small>Akun admin dibuat melalui Supabase Authentication; tidak ada fitur daftar publik.</small>
+    </section>
+
+    <section id="dashboard" class="hidden">
+      <div class="page-heading"><div><span class="eyebrow">OVERVIEW</span><h1>Dashboard <em>pesanan.</em></h1><p>Kelola pesanan pelanggan dan status pembayarannya.</p></div><button id="refreshBtn" class="button outline">↻ Muat ulang</button></div>
+      <div class="stats"><article><small>Total pesanan</small><strong id="statOrders">0</strong></article><article><small>Menunggu diproses</small><strong id="statPending">0</strong></article><article><small>Pembayaran terverifikasi</small><strong id="statPaid">0</strong></article><article><small>Total nilai pesanan</small><strong id="statRevenue">Rp0</strong></article></div>
+      <div class="toolbar"><input id="searchOrders" type="search" placeholder="Cari nomor, nama, atau WhatsApp..."><select id="statusFilter"><option value="">Semua status pesanan</option><option>Menunggu</option><option>Diproses</option><option>Siap diambil</option><option>Selesai</option><option>Dibatalkan</option></select><select id="paymentFilter"><option value="">Semua pembayaran</option><option>Menunggu</option><option>Lunas</option><option>Gagal</option></select></div>
+      <div id="adminMessage" class="message"></div>
+      <div class="table-wrap"><table><thead><tr><th>Pesanan</th><th>Pelanggan</th><th>Ringkasan</th><th>Total</th><th>Pembayaran</th><th>Status pesanan</th><th>Aksi</th></tr></thead><tbody id="ordersBody"><tr><td colspan="7">Memuat pesanan...</td></tr></tbody></table></div>
+      <p class="footnote">Catatan: status pembayaran hanya diubah setelah admin memeriksa bukti pembayaran atau menerima pembayaran.</p>
+    </section>
+  </main>
+  <div id="detailModal" class="modal"><div class="detail-card"><button id="closeDetail" class="close">×</button><span class="eyebrow">ORDER DETAIL</span><h2>Detail <em>pesanan.</em></h2><div id="detailContent"></div><button id="printAdminReceipt" class="button outline full">Cetak rincian</button></div></div>
+  <div id="toast" class="toast"></div>
+</body>
+</html>

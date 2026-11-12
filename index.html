@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#633b2b">
+  <title>Mochi & Onigiri — Japanese Bites</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="announcement">✨ Japanese bites for your happy moments</div>
+  <header class="header">
+    <a class="brand" href="#"><span class="brand-mark">米</span><span><strong>Mochi<span>&</span>Onigiri</strong><small>JAPANESE BITES</small></span></a>
+    <nav><a href="#menu">Menu</a><a href="#story">Tentang</a><a href="admin.html" class="admin-link">Admin ↗</a><button id="openCart" class="cart-button">🛍 Keranjang <b id="cartCount">0</b></button></nav>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">LITTLE TREATS, BIG HAPPINESS</span>
+        <h1>Gigitan kecil,<br><em>bahagia besar.</em></h1>
+        <p>Mochi lembut untuk pencinta manis dan onigiri lezat untuk menemani harimu. Pilih rasa favoritmu, lalu pesan dengan mudah.</p>
+        <a class="btn primary" href="#menu">Jelajahi menu <span>↗</span></a>
+        <div class="trust">✦ Pilihan rasa menarik <span>·</span> Pemesanan praktis</div>
+      </div>
+      <div class="hero-illustration"><div class="sun"></div><div class="bowl"><span class="mochi m1">🍡</span><span class="mochi m2">🍓</span><span class="mochi m3">🍫</span><span class="onigiri">🍙</span></div><span class="sticker">おいしい!<small>DELICIOUS</small></span><span class="art-label">MADE WITH LOVE ♡</span></div>
+    </section>
+
+    <section class="benefits wrap">
+      <div><span>♡</span><p><b>Pilihan beragam</b><small>Rasa untuk setiap selera</small></p></div>
+      <div><span>✦</span><p><b>Harga bersahabat</b><small>Jajan enak tetap hemat</small></p></div>
+      <div><span>⌁</span><p><b>Pesan praktis</b><small>Pesanan tersimpan di database</small></p></div>
+    </section>
+
+    <section class="menu-section wrap" id="menu">
+      <div class="section-title"><div><span class="eyebrow">OUR LITTLE MENU</span><h2>Temukan <em>favoritmu.</em></h2></div><p>Semua harga ditampilkan jelas. Pesanan akan mendapat nomor transaksi dan struk.</p></div>
+      <div class="category-title"><div class="category-icon pink">もち</div><div><h3>Mochi</h3><p>Lembut, kenyal, dan penuh rasa.</p></div><b>Rp2.500 <small>/ buah</small></b></div>
+      <div id="mochiGrid" class="product-grid"><div class="loading">Memuat menu mochi...</div></div>
+      <div class="category-title onigiri-title"><div class="category-icon green">🍙</div><div><h3>Onigiri</h3><p>Nasi kepal lezat untuk mengisi harimu.</p></div><b>Rp10.000 <small>/ buah</small></b></div>
+      <div id="onigiriGrid" class="product-grid"><div class="loading">Memuat menu onigiri...</div></div>
+    </section>
+
+    <section class="story" id="story"><div class="story-art"><div class="story-circle">おいしい<small>GOOD FOOD, GOOD MOOD</small></div></div><div><span class="eyebrow">OUR STORY</span><h2>Rasa sederhana,<br><em>momen istimewa.</em></h2><p>Mochi & Onigiri hadir untuk membuat waktu ngemil jadi lebih menyenangkan. Pilih produk, isi data pesanan, lalu simpan transaksi dengan aman ke database.</p><p class="muted">Pembayaran digital/tunai akan dikonfirmasi oleh admin. Struk bukan bukti pembayaran lunas sebelum pembayaran diverifikasi.</p></div></section>
+  </main>
+
+  <footer class="footer"><a class="brand" href="#"><span class="brand-mark">米</span><span><strong>Mochi<span>&</span>Onigiri</strong><small>JAPANESE BITES</small></span></a><p>Made with ♡ for your happy moments.</p><small>© <span id="year"></span> Mochi & Onigiri</small></footer>
+
+  <div id="shade" class="shade"></div>
+  <aside id="cartPanel" class="cart-panel" aria-label="Keranjang">
+    <div class="panel-head"><div><span class="eyebrow">YOUR ORDER</span><h2>Keranjang <em>belanja</em></h2></div><button id="closeCart" class="close">×</button></div>
+    <div id="cartItems" class="cart-items"><p class="muted">Keranjang masih kosong.</p></div>
+    <div class="panel-bottom"><div class="total-line"><span>Total</span><b id="cartTotal">Rp0</b></div><button id="checkoutBtn" class="btn primary full">Lanjut checkout →</button></div>
+  </aside>
+
+  <div id="checkoutModal" class="modal">
+    <div class="modal-card">
+      <button class="close modal-x" data-close="checkoutModal">×</button>
+      <span class="eyebrow">CHECKOUT</span><h2>Detail <em>pesanan.</em></h2>
+      <form id="checkoutForm">
+        <label for="customerName">Nama pemesan</label><input id="customerName" required maxlength="80" autocomplete="name" placeholder="Nama lengkap">
+        <label for="customerPhone">Nomor WhatsApp</label><input id="customerPhone" required maxlength="25" autocomplete="tel" placeholder="Contoh: 081234567890">
+        <label for="customerAddress">Alamat / catatan (opsional)</label><textarea id="customerAddress" rows="2" maxlength="500" placeholder="Alamat atau catatan pesanan"></textarea>
+        <label>Metode pembayaran</label>
+        <div class="payment-grid">
+          <label><input type="radio" name="payment" value="QRIS" required><span>▦</span><b>QRIS</b></label>
+          <label><input type="radio" name="payment" value="E-Wallet"><span>▣</span><b>Dompet digital</b></label>
+          <label><input type="radio" name="payment" value="Tunai"><span>₨</span><b>Tunai</b></label>
+        </div>
+        <div class="total-line checkout-total"><span>Total pesanan</span><b id="checkoutTotal">Rp0</b></div>
+        <button class="btn primary full" type="submit" id="placeOrder">Buat pesanan dan simpan</button>
+        <p class="tiny">Pesanan akan disimpan ke Supabase. Pembayaran belum otomatis terverifikasi.</p>
+      </form>
+    </div>
+  </div>
+
+  <div id="receiptModal" class="modal">
+    <div class="modal-card receipt">
+      <button class="close modal-x no-print" data-close="receiptModal">×</button>
+      <div class="receipt-head"><div class="brand-mark">米</div><h2>Mochi<span>&</span>Onigiri</h2><p>Terima kasih sudah memesan ♡</p></div>
+      <div class="status-badge" id="receiptStatus">PESANAN TERSIMPAN • MENUNGGU KONFIRMASI</div>
+      <div class="receipt-meta"><div><small>No. pesanan</small><b id="receiptNumber">-</b></div><div><small>Tanggal</small><b id="receiptDate">-</b></div><div><small>Nama</small><b id="receiptCustomer">-</b></div><div><small>Pembayaran</small><b id="receiptPayment">-</b></div></div>
+      <div id="receiptItems" class="receipt-items"></div>
+      <div class="receipt-total"><span>TOTAL</span><b id="receiptTotal">Rp0</b></div>
+      <p id="receiptNote" class="receipt-note">Struk adalah rincian pesanan, bukan bukti pembayaran lunas.</p>
+      <div class="receipt-actions no-print"><button id="printReceipt" class="btn primary full">Cetak / Simpan PDF</button><button id="whatsappOrder" class="btn outline full">Kirim pesanan ke WhatsApp ↗</button></div>
+      <button class="text-button no-print" data-close="receiptModal">Kembali ke menu</button>
+    </div>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+</body>
+</html>
