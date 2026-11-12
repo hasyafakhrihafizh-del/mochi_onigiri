@@ -145,7 +145,7 @@ $("#year").textContent=new Date().getFullYear();
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCart();document.querySelectorAll(".modal.open").forEach(m=>closeModal(m.id));}});
 loadProducts().then(renderCart);
 
-// Tampilkan gambar QRIS saat metode pembayaran QRIS dipilih
+// 1. Munculkan QRIS di Form Checkout saat opsi QRIS diklik
 document.querySelectorAll('input[name="payment"]').forEach((radio) => {
   radio.addEventListener("change", (e) => {
     const qrisBox = document.getElementById("qrisBox");
@@ -153,4 +153,17 @@ document.querySelectorAll('input[name="payment"]').forEach((radio) => {
     qrisBox.style.display = e.target.value === "QRIS" ? "block" : "none";
   });
 });
+
+// 2. Munculkan QRIS di Halaman Struk setelah form dikirim
+const formCheckout = document.getElementById("checkoutForm");
+if (formCheckout) {
+  formCheckout.addEventListener("submit", () => {
+    const selectedPayment = document.querySelector('input[name="payment"]:checked')?.value;
+    const receiptQris = document.getElementById("receiptQris");
+    if (receiptQris) {
+      receiptQris.style.display = selectedPayment === "QRIS" ? "block" : "none";
+    }
+  });
+}
+
 

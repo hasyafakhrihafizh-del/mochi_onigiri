@@ -91,6 +91,11 @@
       <div class="receipt-meta"><div><small>No. pesanan</small><b id="receiptNumber">-</b></div><div><small>Tanggal</small><b id="receiptDate">-</b></div><div><small>Nama</small><b id="receiptCustomer">-</b></div><div><small>Pembayaran</small><b id="receiptPayment">-</b></div></div>
       <div id="receiptItems" class="receipt-items"></div>
       <div class="receipt-total"><span>TOTAL</span><b id="receiptTotal">Rp0</b></div>
+      <div id="receiptQris" style="display: none; text-align: center; margin: 14px 0; padding: 12px; background: #faf6f0; border: 1px dashed #c8b8a6; border-radius: 12px;">
+  <p style="font-size: 13px; font-weight: 600; margin-bottom: 8px;">Scan QRIS untuk menyelesaikan pembayaran:</p>
+  <img src="qris.jpeg" alt="QRIS Mochi & Onigiri" style="max-width: 200px; width: 100%; border-radius: 8px; margin: 0 auto; display: block;">
+</div>
+
       <p id="receiptNote" class="receipt-note">Struk adalah rincian pesanan, bukan bukti pembayaran lunas.</p>
       <div class="receipt-actions no-print"><button id="printReceipt" class="btn primary full">Cetak / Simpan PDF</button><button id="whatsappOrder" class="btn outline full">Kirim pesanan ke WhatsApp ↗</button></div>
       <button class="text-button no-print" data-close="receiptModal">Kembali ke menu</button>
